@@ -55,19 +55,19 @@ class Home extends Component {
                 <div style={styles.sectionsContainer}>
                     {this.renderSection(
                         'Malipred',
-                        'Predict whether a Breast Cancer is Malignant or Benign.',
+                        'Predict whether a breast lesion is malign or benign.',
                         '/malignancy',
                         Colors.Red
                     )}
                     {this.renderSection(
                         'Subtyping',
-                        'Predict the molecular subtype of a Breast Cancer (Luminal A, Luminal B, HER2-enriched and Triple Negative)',
+                        'Predict the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER2-enriched and triple negative.',
                         '/subtyping',
                         Colors.Red
                     )}
                     {this.renderSection(
                         'Upload',
-                        'Help us to grow our dataset by uploading labelled and unlabelled ultrasound images.',
+                        'Help us to grow our dataset of ultrasound images and fuel our future research efforts.',
                         '/upload',
                         Colors.Gray
                     )}
