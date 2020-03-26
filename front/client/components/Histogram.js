@@ -138,7 +138,7 @@ class Histogram extends Component {
         })
 
         return (
-        <svg width={this.props.width} height={this.props.height} style={{ overflow: 'visible' }}>
+        <svg width={this.props.width} height={this.props.height} style={{ overflow: 'visible', marginBottom: 30 }}>
             <YAxis y={40} labels={y.ticks().reverse()} start={15} end={height} />
             
             <g className="chart" transform={`translate(${margin.left},${margin.top})`}>
