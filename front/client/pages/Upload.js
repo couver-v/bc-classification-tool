@@ -25,6 +25,7 @@ class Upload extends Component {
             invasiveCarcinoma: 'not-specified',
             chronicInflammation: 'not-specified',
             trustedCode: '',
+            age: '',
         }
         this.images = [];
         this.bboxes = []
@@ -39,6 +40,10 @@ class Upload extends Component {
 
     handleSubmit(event) {
        
+    }
+
+    onAgeChange(event) {
+        this.setState({ age: event.target.value });
     }
 
     onLocationChange(value) {
@@ -138,7 +143,7 @@ class Upload extends Component {
 
     renderTextInput(title, value, onChange) {
         return (
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: 25 }}>
                 <p style={{ ...styles.inputTextStyle, color: Colors.DarkGray, marginRight: 20 }}>{title}</p>
                 <input
                     type="text"
@@ -172,6 +177,11 @@ class Upload extends Component {
                     {this.renderFilenames()}
                     <br />
                     {this.renderCrop()}
+                    {this.renderTextInput(
+                        'Patient\'s age:',
+                        this.state.age,
+                        this.onAgeChange.bind(this)
+                    )}
                     {this.renderSelect(
                         'Subtype:',
                         [
