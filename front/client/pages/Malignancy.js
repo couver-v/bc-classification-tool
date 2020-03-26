@@ -181,12 +181,10 @@ class Malignancy extends Component {
         return (
             <div style={styles.containerStyle}>
                 <Navbar current='Malipred'/>
-                <h1 style={styles.titleStyle}>Breast Cancer Malignancy Prediction</h1>
+                <h1 style={styles.titleStyle}>Malipred</h1>
+                <h1 style={styles.subtitleStyle}>Breast lesion malignancy prediction</h1>
                 <p style={styles.descriptionStyle}>
-                    This tool can predict if a breast cancer is malignant or benign.<br/>
-                    It also provide the probability distribution.
-
-                    To get the results you need to upload 1 or more ultrasound images of your cancer the to follow the few steps.
+                This tool predicts whether a breast lesion is malign or benign. For a given ultrasound image of a patient’s lesion, the lesion’s malignancy diagnosis is provided along with a confidence measure (probability of malignancy).
                 </p>
                 {this.renderForm()}
                 {this.renderPrediction()}
@@ -221,7 +219,15 @@ const styles = {
         fontFamily: 'Verdana',
         textAlign: 'center',
         marginTop: 50,
-        fontSize: 60
+        fontSize: 60,
+        marginBottom: 10,
+    },
+    subtitleStyle: {
+        color: Colors.DarkGray,
+        fontFamily: 'Verdana',
+        fontSize: 25,
+        margin: 20,
+        textAlign: 'center'
     },
     descriptionStyle: {
         color: Colors.DarkGray,

@@ -4,19 +4,39 @@ import Button from '../components/Button';
 import Colors from '../Colors';
 import Malignancy from './Malignancy';
 import Navbar from '../components/Navbar';
-
-
+ 
 class Home extends Component {
 
-    renderSection(title, description, path) {
+    renderSection(title, description, path, color) {
         return (
-            <div style={styles.linkContainerStyle}>
+            <div style={{ ...styles.linkContainerStyle, borderColor: color }}>
                 <NavLink style={styles.linkStyle} to={path}>
-                    <h1 style={styles.sectionTitleStyle}>{title}</h1>
+                    <h1 style={{ ...styles.sectionTitleStyle }}>{title}</h1>
                     <p style={{ ...styles.descriptionStyle, color: Colors.DarkGray, margin: 0, textAlign: 'left' }}>
                         {description}
                     </p>
                 </NavLink>
+            </div>
+        )
+    }
+
+    renderLogo() {
+        return (
+            <div style={styles.logoContainers}>
+                <a 
+                    href='http://keg.cs.tsinghua.edu.cn'
+                >
+                    <img 
+                        src={'http://keg.cs.tsinghua.edu.cn/wp-content/uploads/2017/08/22.png'}
+                        alt="Knowledge Engineering Group logo"
+                        style={styles.logoStyle}
+                    />
+                </a>
+                <img 
+                    src={'https://china-r.org/img/logo-tsinghua.png'}
+                    alt="Tsinghua University logo"
+                    style={styles.logoStyle}
+                />
             </div>
         )
     }
@@ -28,28 +48,31 @@ class Home extends Component {
                 <h1 style={styles.titleStyle}>DeepBC</h1>
                 <h1 style={styles.subtitleStyle}>Research Project at Tsinghua University</h1>
                 <p style={styles.descriptionStyle}>
-                Breast cancer is the most common cancer and the second leading cause of cancer mortality in women worldwide. Meanwhile, it has a high cure rate when detected early and treated according to best practices.
-                However, the treatment drastically changes depending on the breast cancer molecular subtype: luminal A, luminal B, HER-2 enriched and triple-negative.
+                    Breast cancer is the most common cancer and the second leading cause of cancer mortality in women worldwide. Meanwhile, it has a high cure rate when detected early and treated according to best practices. However, the treatment drastically changes depending on the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER-2 enriched and triple-negative.
                 <br />
-                We present here a toolkit to predict the malignancy of a tumour and to subtype it based on ultrasound images.
+                    We present here a toolkit with the aim to aid diagnosis of breast cancer, by automatically predicting a lesion’s malignancy along with its molecular subtype, using ultrasound images and state-of-the-art computer vision models trained on a vast, previously unreleased dataset.
                 </p>
                 <div style={styles.sectionsContainer}>
                     {this.renderSection(
                         'Malipred',
                         'Predict whether a Breast Cancer is Malignant or Benign.',
-                        '/malignancy'
+                        '/malignancy',
+                        Colors.Red
                     )}
                     {this.renderSection(
                         'Subtyping',
                         'Predict the molecular subtype of a Breast Cancer (Luminal A, Luminal B, HER2-enriched and Triple Negative)',
-                        '/subtyping'
+                        '/subtyping',
+                        Colors.Red
                     )}
                     {this.renderSection(
                         'Upload',
                         'Help us to grow our dataset by uploading labelled and unlabelled ultrasound images.',
-                        '/upload'
+                        '/upload',
+                        Colors.Gray
                     )}
                 </div>
+                {this.renderLogo()}
             </div>
         );
     }
@@ -129,6 +152,17 @@ const styles = {
         color: Colors.Red,
         fontSize: 30,
         marginTop: 0
+    },
+    logoContainers: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    logoStyle: { 
+        height: 120,
+        margin: 30
     }
 }
 

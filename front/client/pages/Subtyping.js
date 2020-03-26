@@ -172,13 +172,11 @@ class Subtyping extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <Navbar current='Subtyping' />
-                <h1 style={styles.titleStyle}>Breast Cancer Subtyping</h1>
+                <Navbar current='Subtyper' />
+                <h1 style={styles.titleStyle}>Breast Cancer Subtyper</h1>
+                <h1 style={styles.subtitleStyle}>Cancerous breast lesion subtyping</h1>
                 <p style={styles.descriptionStyle}>
-                    This tool can predict the hisological molecular subtype of a breast cancer.<br/>
-                    It also provide the probability distribution.
-
-                    To get the results you need to upload 1 or more ultrasound images of your cancer the to follow the few steps.
+                This tool predicts the molecular subtype of a cancerous breast lesion. For a given set of ultrasound images of a patient’s lesion (at least one image), the lesion’s predicted molecular subtype diagnosis is provided along with a confidence measure (probability of each subtype).
                 </p>
                 {this.renderForm()}
                 {this.renderPrediction()}
@@ -213,7 +211,15 @@ const styles = {
         fontFamily: 'Verdana',
         textAlign: 'center',
         marginTop: 50,
-        fontSize: 60
+        fontSize: 60,
+        marginBottom: 10,
+    },
+    subtitleStyle: {
+        color: Colors.DarkGray,
+        fontFamily: 'Verdana',
+        fontSize: 25,
+        margin: 20,
+        textAlign: 'center'
     },
     descriptionStyle: {
         color: Colors.DarkGray,

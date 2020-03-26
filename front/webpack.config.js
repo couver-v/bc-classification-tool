@@ -9,8 +9,8 @@ module.exports = {
    },
    devServer: {
       inline: true,
+      host: '0.0.0.0',
       port: 8001,
-      headers:  { "Access-Control-Allow-Origin": "http://101.6.5.216:18000/", "Access-Control-Allow-Credentials": "true" },
    },
     module: {
         rules: [
@@ -25,6 +25,10 @@ module.exports = {
             {
                 test:/\.css$/,
                 use:['style-loader','css-loader']
+            },
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                loader: 'url-loader?limit=100000'
             }
       ],
    },

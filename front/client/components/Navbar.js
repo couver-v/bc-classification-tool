@@ -10,7 +10,7 @@ class Navbar extends Component {
         this.routes = [
             { title: 'DeepBC', url: '/' },
             { title: 'Malipred', url: '/malignancy' },
-            { title: 'Subtyping', url: '/subtyping' },
+            { title: 'Subtyper', url: '/subtyping' },
             { title: 'Upload', url: '/upload' },
         ] 
     }

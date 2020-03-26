@@ -281,10 +281,10 @@ class Upload extends Component {
         return (
             <div style={styles.containerStyle}>
                 <Navbar current='Upload' />
-                <h1 style={styles.titleStyle}>Upload Ultrasounds</h1>
+                <h1 style={styles.titleStyle}>Upload Ultrasound Images</h1>
                 <p style={styles.descriptionStyle}>
-                    In this section you can upload ultrasound images and the corresponding pathology report.<br/>
-                    The data you upload will help us in our future research to improve the tool and contribute to the research against cancer.
+                Upload additional breast lesion ultrasound images (sonograms) available to you, and any information such as patient age, or the corresponding pathology or diagnosis report. <br />
+Additional images uploaded here will help us grow our ground-truth dataset and fuel our future research efforts with the aim to improve the accuracy of our diagnosis tools.
                 </p>
                 {this.renderForm()}
             </div>

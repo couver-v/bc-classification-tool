@@ -7,7 +7,15 @@ class Footer extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <p style={styles.textStyle}>DeepBC - Knowledge Engineering Group (KEG) - Tsinghua University</p>
+                <p style={styles.textStyle}>
+                    DeepBC - 
+                        <a 
+                            href='http://keg.cs.tsinghua.edu.cn'
+                            style={styles.textStyle}
+                        >
+                            Knowledge Engineering Group (KEG)
+                        </a> - Tsinghua University
+                    </p>
             </div>
         );
     }
