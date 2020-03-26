@@ -4,6 +4,7 @@ import Histogram from '../components/Histogram';
 import CropImage from '../components/CropImage';
 import Button from '../components/Button';
 import { FiCheck } from 'react-icons/fi';
+import Navbar from '../components/Navbar';
 var d3 = require("d3");
 class Subtyping extends Component {
 
@@ -171,6 +172,7 @@ class Subtyping extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
+                <Navbar current='Subtyping' />
                 <h1 style={styles.titleStyle}>Breast Cancer Subtyping</h1>
                 <p style={styles.descriptionStyle}>
                     This tool can predict the hisological molecular subtype of a breast cancer.<br/>
@@ -209,14 +211,18 @@ const styles = {
     titleStyle: {
         color: Colors.Red,
         fontFamily: 'Verdana',
+        textAlign: 'center',
         marginTop: 50,
         fontSize: 60
     },
     descriptionStyle: {
         color: Colors.DarkGray,
         fontFamily: 'Verdana',
+        textAlign: 'justify',
         fontSize: 25,
-        margin: 25
+        marginLeft: '5vw',
+        marginRight: '5vw',
+        maxWidth: '100%',
     },
     formStyle: {
         // alignSelf: 'flex-start',

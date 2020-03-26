@@ -4,7 +4,6 @@ import Subtyping from './pages/Subtyping';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
 import Malignancy from './pages/Malignancy';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
                 }}
             >
                 <div>
-                    <Navbar />
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/upload" component={Upload} />

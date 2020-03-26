@@ -4,6 +4,7 @@ import Colors from '../Colors';
 import CropImage from '../components/CropImage';
 import Button from '../components/Button';
 import { FiCheck } from 'react-icons/fi';
+import Navbar from '../components/Navbar';
 var d3 = require("d3");
 
 
@@ -23,6 +24,7 @@ class Upload extends Component {
             residualCarcinoma: 'not-specified',
             invasiveCarcinoma: 'not-specified',
             chronicInflammation: 'not-specified',
+            trustedCode: '',
         }
         this.images = [];
         this.bboxes = []
@@ -61,6 +63,10 @@ class Upload extends Component {
 
     onChronicInflammationChange(value) {
         this.setState({ chronicInflammation: value });
+    }
+
+    onTrustedCodeChange(event) {
+        this.setState({ trustedCode: event.target.value });
     }
 
     onImageChange(event) {
@@ -130,6 +136,20 @@ class Upload extends Component {
         )
     }
 
+    renderTextInput(title, value, onChange) {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <p style={{ ...styles.inputTextStyle, color: Colors.DarkGray, marginRight: 20 }}>{title}</p>
+                <input
+                    type="text"
+                    value={value}
+                    onChange={onChange}
+                    style={{ fontSize: 20, fontFamily: 'Verdana', paddingLeft: 10, paddingRight: 10 }}
+                />
+            </div>
+        )
+    } 
+
     renderForm() {
         return (
             <form
@@ -188,7 +208,7 @@ class Upload extends Component {
                         this.onGardeChange.bind(this)
                     )}
                     {this.renderSelect(
-                        'Residual Carcinoma',
+                        'Residual Carcinoma:',
                         [
                             { value: 'not-specified', label: 'Not specified' },
                             { value: 'presence', label: 'Presence' },
@@ -198,7 +218,7 @@ class Upload extends Component {
                         this.onResidualCarcinomaChange.bind(this)
                     )}
                     {this.renderSelect(
-                        'Invasive Carcinoma',
+                        'Invasive Carcinoma:',
                         [
                             { value: 'not-specified', label: 'Not specified' },
                             { value: 'presence', label: 'Presence' },
@@ -208,17 +228,7 @@ class Upload extends Component {
                         this.onInvasiveCarcinomaChange.bind(this)
                     )}
                     {this.renderSelect(
-                        'Invasive Carcinoma',
-                        [
-                            { value: 'not-specified', label: 'Not specified' },
-                            { value: 'presence', label: 'Presence' },
-                            { value: 'absence', label: 'Absence' },
-                        ],
-                        this.state.invasiveCarcinoma,
-                        this.onInvasiveCarcinomaChange.bind(this)
-                    )}
-                    {this.renderSelect(
-                        'Chronic Inflammation',
+                        'Chronic Inflammation:',
                         [
                             { value: 'not-specified', label: 'Not specified' },
                             { value: 'presence', label: 'Presence' },
@@ -226,6 +236,11 @@ class Upload extends Component {
                         ],
                         this.state.chronicInflammation,
                         this.onChronicInflammationChange.bind(this)
+                    )}
+                    {this.renderTextInput(
+                        'Trusted Code:',
+                        this.state.trustedCode,
+                        this.onTrustedCodeChange.bind(this)
                     )}
                     <Button 
                         style={styles.buttonStyle}
@@ -265,7 +280,8 @@ class Upload extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <h1 style={styles.titleStyle}>Upload ultrasounds</h1>
+                <Navbar current='Upload' />
+                <h1 style={styles.titleStyle}>Upload Ultrasounds</h1>
                 <p style={styles.descriptionStyle}>
                     In this section you can upload ultrasound images and the corresponding pathology report.<br/>
                     The data you upload will help us in our future research to improve the tool and contribute to the research against cancer.
@@ -304,14 +320,18 @@ const styles = {
     titleStyle: {
         color: Colors.Red,
         fontFamily: 'Verdana',
+        textAlign: 'center',
         marginTop: 50,
         fontSize: 60
     },
     descriptionStyle: {
         color: Colors.DarkGray,
         fontFamily: 'Verdana',
+        textAlign: 'justify',
         fontSize: 25,
-        margin: 25
+        marginLeft: '5vw',
+        marginRight: '5vw',
+        maxWidth: '100%',
     },
     formStyle: {
         // alignSelf: 'flex-start',

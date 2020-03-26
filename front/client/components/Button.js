@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
 import Colors from '../Colors';
+import Loader from 'react-loader-spinner'
+
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 class Button extends Component {
     
+    renderContent() {
+        if (this.props.load) {
+            return (
+                <Loader
+                    type="ThreeDots"
+                    color="white"
+                    height={30}
+                    width={80}
+                    style={{ position: 'absolute', width: '50%', left: '25%', right: '25%', }}
+                />
+            )
+        }
+    }
+
     render() {
         return (
             <button 
@@ -16,8 +32,11 @@ class Button extends Component {
                 type={this.props.type}
                 disabled={this.props.disabled}
                 onClick={this.props.onClick}
-            >
-                {this.props.children}
+            >   
+                <div style={{ opacity: this.props.load ? 0 : 1 }}>
+                    {this.props.children}
+                </div>
+                {this.renderContent()}
             </button>
         )
     }
@@ -34,6 +53,7 @@ const styles = {
         fontFamily: 'Verdana',
         paddingLeft: 25,
         paddingRight: 25,
+        position: 'relative'
     },
 }
 

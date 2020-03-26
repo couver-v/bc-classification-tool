@@ -4,33 +4,38 @@ import Histogram from '../components/Histogram';
 import CropImage from '../components/CropImage';
 import Button from '../components/Button';
 import { FiCheck } from 'react-icons/fi';
+import Navbar from '../components/Navbar';
+import deepBCApi from '../DeepBCApi';
 var d3 = require("d3");
 class Malignancy extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { filenames: [], showResult: false, showCrop: false, canSubmit: false, cropId: 0 }
+        this.state = { filenames: [], showResult: false, showCrop: false, canSubmit: false, cropId: 0, load:false }
         this.images = [];
         this.bboxes = []
         this.fileInput = React.createRef();
     }
 
     reset() {
-        this.setState({ filenames: [], showResult: false, showCrop: false, canSubmit: false, cropId: 0 })
+        this.setState({ filenames: [], showResult: false, showCrop: false, canSubmit: false, cropId: 0, load:false })
         this.images = [];
         this.bboxes = []
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        // alert(
-        //     `Selected file - ${this.fileInput.current.files[0].name}`
-        // );
-        const data = [
-            { label: 'benign', probability: 0.25 },
-            { label: 'malignant', probability: 0.75 },
-        ]
-        this.setState({ data, showResult: true, canSubmit: false })
+        this.setState({ load: true })
+        deepBCApi.malignancyPred(this.files, this.bboxes)
+        .then(response => {
+            let data = response.data.result[this.state.filenames[0]];
+            data = Object.keys(data).map(key => { return { label: key, probability: data[key] }});
+            this.setState({ data, showResult: true, canSubmit: false, load: false })
+        })
+        .catch(error => {
+            console.log(error);
+            this.setState({ load: false })
+        });
     }
 
     onChange(event) {
@@ -61,7 +66,7 @@ class Malignancy extends Component {
                 }
             });
             reader.readAsDataURL(this.files[this.imId]);
-          }
+        }
     }
 
     renderFilenames() {
@@ -123,7 +128,7 @@ class Malignancy extends Component {
                         <input
                             accept="image/*"
                             style={{ display: 'none'}}
-                            type="file" multiple
+                            type="file"
                             ref={this.fileInput}
                             onChange={this.onChange.bind(this)}
                         />
@@ -135,6 +140,7 @@ class Malignancy extends Component {
                         style={styles.buttonStyle}
                         type="submit"
                         disabled={!this.state.canSubmit}
+                        load={this.state.load}
                     >
                         SUBMIT
                     </Button>
@@ -144,7 +150,12 @@ class Malignancy extends Component {
     }
 
     onSaveBox(bbox) {
-        this.bboxes.push(bbox)
+        this.bboxes.push([
+            parseInt(bbox.x),
+            parseInt(bbox.y),
+            parseInt(bbox.x + bbox.width),
+            parseInt(bbox.y + bbox.height)
+        ])
         if (this.state.cropId < this.images.length - 1) {
             this.setState({ cropId: this.state.cropId + 1 });
         } else {
@@ -169,7 +180,8 @@ class Malignancy extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <h1 style={styles.titleStyle}>Breast Cancer Prediction</h1>
+                <Navbar current='Malipred'/>
+                <h1 style={styles.titleStyle}>Breast Cancer Malignancy Prediction</h1>
                 <p style={styles.descriptionStyle}>
                     This tool can predict if a breast cancer is malignant or benign.<br/>
                     It also provide the probability distribution.
@@ -207,14 +219,18 @@ const styles = {
     titleStyle: {
         color: Colors.Red,
         fontFamily: 'Verdana',
+        textAlign: 'center',
         marginTop: 50,
         fontSize: 60
     },
     descriptionStyle: {
         color: Colors.DarkGray,
         fontFamily: 'Verdana',
+        textAlign: 'justify',
         fontSize: 25,
-        margin: 25
+        marginLeft: '5vw',
+        marginRight: '5vw',
+        maxWidth: '100%',
     },
     formStyle: {
         marginTop: 15,

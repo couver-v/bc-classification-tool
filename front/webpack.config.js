@@ -9,7 +9,8 @@ module.exports = {
    },
    devServer: {
       inline: true,
-      port: 8001
+      port: 8001,
+      headers:  { "Access-Control-Allow-Origin": "http://101.6.5.216:18000/", "Access-Control-Allow-Credentials": "true" },
    },
     module: {
         rules: [
