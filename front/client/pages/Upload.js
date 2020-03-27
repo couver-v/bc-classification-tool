@@ -344,9 +344,7 @@ const styles = {
         maxWidth: '100%',
     },
     formStyle: {
-        // alignSelf: 'flex-start',
         marginTop: 15,
-        // width: '100%'
     },
     inputStyle: {
         padding: 6,

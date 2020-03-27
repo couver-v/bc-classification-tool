@@ -1,17 +1,19 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-   entry: './client/main.js',
-   output: {
-      path: path.join(__dirname, '/bundle'),
-      filename: 'index_bundle.js'
-   },
-   devServer: {
-      inline: true,
-      host: '0.0.0.0',
-      port: 18001,
-   },
+    entry: './client/main.js',
+    output: {
+       path: path.join(__dirname, '/bundle'),
+       filename: 'index_bundle.js'
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './client/index.html'
+        })
+    ],
     module: {
         rules: [
             {
@@ -30,11 +32,6 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
                 loader: 'url-loader?limit=100000'
             }
-      ],
-   },
-   plugins:[
-      new HtmlWebpackPlugin({
-         template: './client/index.html'
-      })
-   ]
-}
+        ],
+    }
+};
