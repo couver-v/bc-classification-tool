@@ -1,0 +1,12 @@
+name: fastapi
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - uvicorn
+  - fastapi
+  - pillow
+  - mlflow
+prefix: /home/chenhui/miniconda3/envs/fastapi
+
