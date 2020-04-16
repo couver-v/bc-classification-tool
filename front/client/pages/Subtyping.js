@@ -172,11 +172,14 @@ class Subtyping extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <Navbar current='Subtyper' />
-                <h1 style={styles.titleStyle}>Breast Cancer Subtyper</h1>
-                <h1 style={styles.subtitleStyle}>Cancerous breast lesion subtyping</h1>
+                <Navbar current='Molecular subtyping' />
+                <h1 style={styles.titleStyle}>Molecular subtyping</h1>
+                <h1 style={styles.subtitleStyle}>Cancerous breast lesion molecular subtyping</h1>
                 <p style={styles.descriptionStyle}>
                 This tool predicts the molecular subtype of a cancerous breast lesion. For a given set of ultrasound images of a patient’s lesion (at least one image), the lesion’s predicted molecular subtype diagnosis is provided along with a confidence measure (probability of each subtype).
+                </p>
+                <p style={styles.descriptionStyle}>
+                    Only <strong>2-D grayscale</strong> or <strong>color Doppler</strong> ultrasound images in JPEG, JPG, TIF, PNG, and GIF are supported for now.
                 </p>
                 {this.renderForm()}
                 {this.renderPrediction()}

@@ -290,11 +290,15 @@ class Upload extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <Navbar current='Upload' />
-                <h1 style={styles.titleStyle}>Upload Ultrasound Images</h1>
+                <Navbar current='Ultrasound upload' />
+                <h1 style={styles.titleStyle}>Ultrasound upload</h1>
+                <h1 style={styles.subtitleStyle}>Upload ultrasound images</h1>
                 <p style={styles.descriptionStyle}>
-                Upload additional breast lesion ultrasound images (sonograms) available to you, and any information such as patient age, or the corresponding pathology or diagnosis report. <br />
+                Upload additional breast lesion 2-D grayscale or color Doppler ultrasound images (sonograms) available to you, and any information such as patient age, or the corresponding pathology or diagnosis report. <br />
 Additional images uploaded here will help us grow our ground-truth dataset and fuel our future research efforts with the aim to improve the accuracy of our diagnosis tools.
+                </p>
+                <p style={styles.descriptionStyle}>
+                    Only <strong>2-D grayscale</strong> or <strong>color Doppler</strong> ultrasound images in JPEG, JPG, TIF, PNG, and GIF are supported for now.
                 </p>
                 {this.renderForm()}
             </div>
@@ -333,6 +337,13 @@ const styles = {
         textAlign: 'center',
         marginTop: 50,
         fontSize: 60
+    },
+    subtitleStyle: {
+        color: Colors.DarkGray,
+        fontFamily: 'Verdana',
+        fontSize: 25,
+        margin: 20,
+        textAlign: 'center'
     },
     descriptionStyle: {
         color: Colors.DarkGray,

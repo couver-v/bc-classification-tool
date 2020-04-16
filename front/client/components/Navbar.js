@@ -9,9 +9,9 @@ class Navbar extends Component {
         super(props)
         this.routes = [
             { title: 'DeepBC', url: '/' },
-            { title: 'Malipred', url: '/malignancy' },
-            { title: 'Subtyper', url: '/subtyping' },
-            { title: 'Upload', url: '/upload' },
+            { title: 'Malignancy prediction', url: '/malignancy' },
+            { title: 'Molecular subtyping', url: '/subtyping' },
+            { title: 'Ultrasound upload', url: '/upload' },
         ] 
     }
     

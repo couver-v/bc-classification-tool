@@ -180,11 +180,14 @@ class Malignancy extends Component {
     render() {
         return (
             <div style={styles.containerStyle}>
-                <Navbar current='Malipred'/>
-                <h1 style={styles.titleStyle}>Malipred</h1>
+                <Navbar current='Malignancy prediction'/>
+                <h1 style={styles.titleStyle}>Malignancy prediction</h1>
                 <h1 style={styles.subtitleStyle}>Breast lesion malignancy prediction</h1>
                 <p style={styles.descriptionStyle}>
                 This tool predicts whether a breast lesion is malign or benign. For a given ultrasound image of a patient’s lesion, the lesion’s malignancy diagnosis is provided along with a confidence measure (probability of malignancy).
+                </p>
+                <p style={styles.descriptionStyle}>
+                    Only <strong>2-D grayscale</strong> or <strong>color Doppler</strong> ultrasound images in JPEG, JPG, TIF, PNG, and GIF are supported for now.
                 </p>
                 {this.renderForm()}
                 {this.renderPrediction()}

@@ -48,25 +48,25 @@ class Home extends Component {
                 <h1 style={styles.titleStyle}>DeepBC</h1>
                 <h1 style={styles.subtitleStyle}>Research Project at Tsinghua University</h1>
                 <p style={styles.descriptionStyle}>
-                    Breast cancer is the most common cancer and the second leading cause of cancer mortality in women worldwide. Meanwhile, it has a high cure rate when detected early and treated according to best practices. However, the treatment drastically changes depending on the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER-2 enriched and triple-negative.
+                    Breast cancer is the most common cancer and the second leading cause of cancer mortality in women worldwide. Meanwhile, it has a high cure rate when detected early and treated according to best practices. However, the treatment drastically changes depending on the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER2-overexpressing and triple-negative.
                 <br />
                     We present here a toolkit with the aim to aid diagnosis of breast cancer, by automatically predicting a lesion’s malignancy along with its molecular subtype, using ultrasound images and state-of-the-art computer vision models trained on a vast, previously unreleased dataset.
                 </p>
                 <div style={styles.sectionsContainer}>
                     {this.renderSection(
-                        'Malipred',
+                        'Malignancy prediction',
                         'Predict whether a breast lesion is malign or benign.',
                         '/malignancy',
                         Colors.Red
                     )}
                     {this.renderSection(
-                        'Subtyping',
-                        'Predict the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER2-enriched and triple negative.',
+                        'Molecular subtyping',
+                        'Predict the molecular subtype of a cancerous breast lesion: luminal A, luminal B, HER2-overexpressing and triple negative.',
                         '/subtyping',
                         Colors.Red
                     )}
                     {this.renderSection(
-                        'Upload',
+                        'Ultrasound upload',
                         'Help us to grow our dataset of ultrasound images and fuel our future research efforts.',
                         '/upload',
                         Colors.Gray
