@@ -17,7 +17,7 @@ Install pytorch and torchvision following the [official instructions](https://py
 Download trained models from [here](https://www.amazon.com/clouddrive/share/rtcwRdxFwcdHzo5hHY8LWAf0XGV4FVDsQJa39QIDO8V).
 
 
-To start the service, try the following command:
+To start the service with [Uvicorn](https://www.uvicorn.org/), try the following command:
 ```
 unzip models.zip
 cd api

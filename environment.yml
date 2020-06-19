@@ -1,12 +1,15 @@
-name: fastapi
+name: sonobreast
 channels:
-  - anaconda
   - conda-forge
   - defaults
 dependencies:
-  - uvicorn
-  - fastapi
   - pillow
+  - fastapi
   - mlflow
-prefix: /home/chenhui/miniconda3/envs/fastapi
+  - motor
+  - scikit-learn
+  - matplotlib
+  - scikit-image
+  - httpx
+prefix: /home/chenhui/miniconda3/envs/sonobreast
 
