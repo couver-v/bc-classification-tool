@@ -16,7 +16,7 @@ from ....crud.diagnoses import create_diagnosis, search_diagnoses
 from ....crud.medical_records import create_medical_record, search_medical_records
 from ....crud.utils import generate_new_objectid
 from ....db.database import AsyncIOMotorClient, get_database
-from ....models.basemodel import ObjectId, ReturnCode
+from ....models.basemodel import ObjectId, ReturnCode, ErrorResponse
 from ....models.diagnosis import DiagnosisPerImage, DiagnoseInput, DiagnoseResult, DiagnosisInCreate, DiagnoseResultResponse, DiagnosisType, SearchDiagnosisResponse
 from ....models.image import Image, ImageModality, RectCoordinatePercentage
 from ....models.medical_record import MedicalRecordInCreate
@@ -48,7 +48,11 @@ async def diagnose_malignancy(image_files: List[UploadFile] = File(...), image_m
     # make predictions
     image_data = [image_loader(im.url, im.lesion_rect) for im in images]
     features = [age, lesion_diameter]
-    result = infer_malignancy(image_data, features)
+    result, error_msg = infer_malignancy(image_data, features)
+    if result is None:
+        time_used = int((time.perf_counter() - start) * 1000)
+        response = ErrorResponse(error_message=error_msg, time_used=time_used, return_code=ReturnCode.FAIL)
+        return Response(content=response.json(), media_type="application/json")
     result, result_per_image = parse_result(result, images)
 
     # insert to database
@@ -75,7 +79,11 @@ async def diagnose_molecular_subtype(image_files: List[UploadFile]=File(...), im
     # make predication
     image_data = [image_loader(im.url, im.lesion_rect) for im in images]
     features = [age, lesion_diameter]
-    result = infer_molecular_subtype(image_data, features)
+    result, error_msg = infer_molecular_subtype(image_data, features)
+    if result is None:
+        time_used = int((time.perf_counter() - start) * 1000)
+        response = ErrorResponse(error_message=error_msg, time_used=time_used, return_code=ReturnCode.FAIL)
+        return Response(content=response.json(), media_type="application/json")
     result, result_per_image = parse_result(result, images)
 
     # insert to database

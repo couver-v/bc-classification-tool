@@ -24,12 +24,18 @@ def transform_image(image):
     return transform(image)
 
 
+def has_nan(x):
+    return np.any(np.isnan(np.asarray(x)))
+
+
 def infer_malignancy(images, features):
     index_to_class = ['benign', 'normal', 'malignant']
     num_images = len(images)
     images = torch.stack([transform_image(im) for im in images])
     outputs = MODEL['malignancy'](images)
     prob_per_im = F.softmax(outputs, dim=-1).detach().numpy()
+    if has_nan(prob_per_im):
+        return None, 'Found NaN values during inference.'
     prob = np.mean(prob_per_im, axis=0)
 
     result_per_image = []
@@ -48,7 +54,7 @@ def infer_malignancy(images, features):
         else:
             res[cls] = prob[cls_idx]
     result = MalignancyResult(**res)
-    return {'result': result, 'result_per_image': result_per_image}
+    return {'result': result, 'result_per_image': result_per_image}, None
 
 
 def _normalize(features):
@@ -68,15 +74,17 @@ def infer_molecular_subtype(images, features):
     image_array = [np.asarray(im) for im in images]
     features = np.asarray(features[:1])
     prob = MODEL['molecular_subtype']((image_array, features))
+    if has_nan(prob):
+        return None, 'Found NaN values during inference.'
     
     result_per_image = []
     for idx in range(num_images):
         res = {}
         for cls_idx, cls in enumerate(index_to_class):
-                res[cls] = 1.0 / len(index_to_class)
+                res[cls] = prob[cls_idx]
         result_per_image.append(MolecularSubtypeResult(**res))
     res = {}
     for cls_idx, cls in enumerate(index_to_class):
         res[cls] = prob[cls_idx]
     result = MolecularSubtypeResult(**res)
-    return {'result': result, 'result_per_image': result_per_image}
+    return {'result': result, 'result_per_image': result_per_image}, None
